@@ -12,6 +12,11 @@ import org.hibernate.annotations.GenericGenerator;
 
 @Entity
 @Table
+
+@NamedQueries({
+	@NamedQuery(name="Viewer.getAll", query="SELECT v FROM Viewer v WHERE v.role = :pRole"),
+	@NamedQuery(name="Viewer.getExisting", query="SELECT v FROM Viewer v WHERE v.userName=:pUserName AND v.password=:pPassword AND v.role=:pRole")
+})
 public class Viewer {
 	
 	@Id

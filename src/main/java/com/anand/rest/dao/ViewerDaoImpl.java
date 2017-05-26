@@ -5,6 +5,7 @@ import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
+import javax.persistence.TypedQuery;
 
 import org.springframework.stereotype.Repository;
 
@@ -25,8 +26,19 @@ public class ViewerDaoImpl implements ViewerDao {
 
 	@Override
 	public List<Viewer> getAllViewers() {
-		Query query = em.createQuery("From Viewer");
+		//We dont have do do casting in TypedQuery
+		TypedQuery<Viewer> query = em.createNamedQuery("Viewer.getAll", Viewer.class);
+		query.setParameter("pRole", "USER");
 		return query.getResultList();
+	}
+
+	@Override
+	public Viewer getViewer(String userName, String password) {
+		TypedQuery<Viewer> query = em.createNamedQuery("Viewer.getExisting", Viewer.class);
+		query.setParameter("pUserName", userName);
+		query.setParameter("pPassword", password);
+		query.setParameter("pRole", "USER");
+		return query.getSingleResult();
 	}
 
 }

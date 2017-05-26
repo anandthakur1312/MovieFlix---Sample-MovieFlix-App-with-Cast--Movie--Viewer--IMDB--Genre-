@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.anand.rest.dao.ViewerDao;
+import com.anand.rest.exception.ResourceNotFoundException;
 import com.anand.rest.model.Viewer;
 
 @Service
@@ -30,4 +31,13 @@ public class ViewerServiceImpl implements ViewerService{
 		return viewerDao.getAllViewers();
 	}
 
+	
+	@Override
+	public Viewer getViewer(String userName, String password) {
+		Viewer existing = viewerDao.getViewer(userName,password);
+		if(existing == null)
+			throw new ResourceNotFoundException("----------------------------------");
+		return existing;
+		
+	}
 }

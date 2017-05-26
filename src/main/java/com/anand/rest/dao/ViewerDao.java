@@ -9,4 +9,6 @@ public interface ViewerDao {
 
 	public List<Viewer> getAllViewers();
 
+	public Viewer getViewer(String userName, String password);
+
 }

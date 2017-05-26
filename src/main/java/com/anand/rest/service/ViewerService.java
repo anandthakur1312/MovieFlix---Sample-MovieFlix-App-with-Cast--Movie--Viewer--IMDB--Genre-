@@ -9,4 +9,6 @@ public interface ViewerService {
 
 	public List<Viewer> getAllViewers();
 
+	public Viewer getViewer(String userName, String password);
+
 }
