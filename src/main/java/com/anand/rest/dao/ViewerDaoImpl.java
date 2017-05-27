@@ -41,4 +41,21 @@ public class ViewerDaoImpl implements ViewerDao {
 		return query.getSingleResult();
 	}
 
+	@Override
+	public Viewer getViewerById(String id) {
+		Viewer existing = em.find(Viewer.class, id);
+		return existing;
+	}
+
+	@Override
+	public Viewer updateViewer(Viewer viewer) {
+		em.merge(viewer);
+		return viewer;
+	}
+
+	@Override
+	public void deleteViewer(Viewer existing) {
+		em.remove(existing);
+	}
+
 }

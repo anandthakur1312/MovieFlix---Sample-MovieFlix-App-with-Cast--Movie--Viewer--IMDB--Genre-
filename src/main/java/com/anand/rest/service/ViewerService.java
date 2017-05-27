@@ -11,4 +11,10 @@ public interface ViewerService {
 
 	public Viewer getViewer(String userName, String password);
 
+	public Viewer updateViewer(String id, Viewer viewer);
+
+	public Viewer getViewerById(String id);
+
+	public void deleteViewer(String id);
+
 }

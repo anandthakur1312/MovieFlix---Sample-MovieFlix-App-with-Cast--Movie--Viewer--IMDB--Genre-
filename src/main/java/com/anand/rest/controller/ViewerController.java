@@ -31,12 +31,29 @@ public class ViewerController {
 	public Viewer getViewer(@PathVariable("userName") String userName, @PathVariable("password") String password){
 		return viewerService.getViewer(userName,password);
 	}
-	
 
 	@RequestMapping(method = RequestMethod.POST,produces = MediaType.APPLICATION_JSON_UTF8_VALUE, consumes = MediaType.APPLICATION_JSON_UTF8_VALUE)
 	public Viewer createViewer(@RequestBody Viewer viewer){
 		return viewerService.createViewer(viewer);	
 	}
+	
+	@RequestMapping(path="{id}", method = RequestMethod.PUT,produces = MediaType.APPLICATION_JSON_UTF8_VALUE, consumes = MediaType.APPLICATION_JSON_UTF8_VALUE)
+	public Viewer updateViewer(@PathVariable("id") String id, @RequestBody Viewer viewer){
+		return viewerService.updateViewer(id, viewer);	
+	}
+	
+	@RequestMapping(path="{id}",method = RequestMethod.GET,produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
+	public Viewer getViewerById(@PathVariable("id") String id){
+		return viewerService.getViewerById(id);
+	}
+	
+	@RequestMapping(path="{id}", method = RequestMethod.DELETE,produces = MediaType.APPLICATION_JSON_UTF8_VALUE, consumes = MediaType.APPLICATION_JSON_UTF8_VALUE)
+	public void deleteViewer(@PathVariable("id") String id){
+		 viewerService.deleteViewer(id);	
+	}
+	
+	
+	
 	
 
 }

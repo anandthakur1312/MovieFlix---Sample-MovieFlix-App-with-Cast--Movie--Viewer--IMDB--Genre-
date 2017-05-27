@@ -11,4 +11,10 @@ public interface ViewerDao {
 
 	public Viewer getViewer(String userName, String password);
 
+	public Viewer getViewerById(String id);
+
+	public Viewer updateViewer(Viewer viewer);
+
+	public void deleteViewer(Viewer existing);
+
 }

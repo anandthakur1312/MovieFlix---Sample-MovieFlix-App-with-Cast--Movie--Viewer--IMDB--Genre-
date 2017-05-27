@@ -14,7 +14,6 @@ import com.anand.rest.model.Viewer;
 public class ViewerServiceImpl implements ViewerService{
 	
 	@Autowired
-	
 	private ViewerDao viewerDao;
 	
 	@Override
@@ -35,9 +34,41 @@ public class ViewerServiceImpl implements ViewerService{
 	@Override
 	public Viewer getViewer(String userName, String password) {
 		Viewer existing = viewerDao.getViewer(userName,password);
+		
+		//This Condition is not throwing custom exception
 		if(existing == null)
-			throw new ResourceNotFoundException("----------------------------------");
+			throw new ResourceNotFoundException("------User not available for -----------" +userName+ "Password" +password);
 		return existing;
+		
+	}
+
+	@Override
+	@Transactional
+	public Viewer updateViewer(String id, Viewer viewer) {
+		Viewer existing = viewerDao.getViewerById(id);
+		if(existing==null){
+			throw new ResourceNotFoundException("-----------User not found for id: " + id);
+		}
+		return viewerDao.updateViewer(viewer);
+	}
+
+	@Override
+	public Viewer getViewerById(String id) {
+		Viewer existing = viewerDao.getViewerById(id);
+		if(existing==null){
+			throw new ResourceNotFoundException("-----------User not found for id: " + id);
+		}
+		return existing;
+	}
+
+	@Override
+	@Transactional
+	public void deleteViewer(String id) {
+		Viewer existing = viewerDao.getViewerById(id);
+		if(existing==null){
+			throw new ResourceNotFoundException("-----------User not found for id: " + id);
+		}
+		viewerDao.deleteViewer(existing);
 		
 	}
 }
