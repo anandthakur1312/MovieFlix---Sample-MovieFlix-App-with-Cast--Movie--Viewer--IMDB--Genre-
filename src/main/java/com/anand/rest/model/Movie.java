@@ -1,17 +1,22 @@
 package com.anand.rest.model;
 
+
 import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+
 import javax.persistence.ManyToMany;
 import javax.persistence.Table;
+
 
 import org.hibernate.annotations.GenericGenerator;
 import org.hibernate.annotations.LazyCollection;
 import org.hibernate.annotations.LazyCollectionOption;
+
+
 
 @Entity
 @Table(name="movie")
@@ -20,8 +25,16 @@ public class Movie {
 		@Id
 		@GenericGenerator(name = "customUUID", strategy = "uuid2")
 		@GeneratedValue(generator ="customUUID")
-		private String id;
+		private String movieId;
 		
+		public String getMovieId() {
+			return movieId;
+		}
+
+		public void setMovieId(String movieId) {
+			this.movieId = movieId;
+		}
+
 		@Column(unique = true)
 		private String title;
 		
@@ -30,17 +43,13 @@ public class Movie {
 		private String country;
 		private String type;
 		
+				
 		@LazyCollection(LazyCollectionOption.FALSE)
 		@ManyToMany
+		
 		private List<Cast> cast;
 
-		public String getId() {
-			return id;
-		}
-
-		public void setId(String id) {
-			this.id = id;
-		}
+		
 
 		public String getTitle() {
 			return title;
@@ -92,7 +101,7 @@ public class Movie {
 
 		@Override
 		public String toString() {
-			return "Movie [id=" + id + ", title=" + title + ", year=" + year + ", language=" + language + ", country="
+			return "Movie [movieId=" + movieId + ", title=" + title + ", year=" + year + ", language=" + language + ", country="
 					+ country + ", type=" + type + ", cast=" + cast + "]";
 		}
 		
